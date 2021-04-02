@@ -1,0 +1,24 @@
+{
+  "name": "final_project",
+  "version": "1.0.0",
+  "description": "## Scope",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/samleemcknight/final_project_planning.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/samleemcknight/final_project_planning/issues"
+  },
+  "homepage": "https://github.com/samleemcknight/final_project_planning#readme",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "expess": "^0.0.1-security"
+  }
+}
