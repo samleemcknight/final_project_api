@@ -14,7 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.user.hasMany(models.recipe)
-      models.user.belongsToMany(models.ingredient, {through: "usersIngredients"})
+      models.user.belongsToMany(models.ingredient, {through: "users_ingredients"})
     }
 
     validPassword(plainTextPassword) {
