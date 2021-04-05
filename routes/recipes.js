@@ -6,6 +6,7 @@ const ctrl = require("../controllers");
 router.get("/", ctrl.recipesCtrl.index);
 router.get("/:ingredients", ctrl.recipesCtrl.find);
 router.get("/show/:id", ctrl.recipesCtrl.show)
+router.post("/", ctrl.recipesCtrl.favorite)
 
 // exports
 module.exports = router;

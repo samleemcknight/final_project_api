@@ -14,6 +14,9 @@ module.exports = {
       instructions: {
         type: Sequelize.TEXT
       },
+      userId: {
+        type: Sequelize.INTEGER
+      },
       image_url: {
         type: Sequelize.STRING
       },

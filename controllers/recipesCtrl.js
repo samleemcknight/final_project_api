@@ -38,8 +38,35 @@ const show = (req, res) => {
   })
 }
 
+// add recipe on '/show' to db favorites
+const favorite = async (req, res) => {
+  // find user 
+  const foundUser = await db.user.findOne({ where: { id: req.body.user.id } })
+  const ingredients = []
+  
+  for (let i = 0; i < req.body.extendedIngredients.length; i++) {
+    ingredients.push(req.body.extendedIngredients[i].original)
+  }
+  ingredients = ingredients.join(', ')
+
+  if (!foundUser) {
+   return res.json({ message: "No user found"})
+  }
+  const newRecipe = await db.recipe.create({
+    title: req.body.title,
+    instructions: req.body.instructions,
+    image_url: req.body.image,
+    ingredients: req.body.extendedIngredients.join(', ')
+  }) 
+  foundUser.createRecipe(newRecipe).then(relationInfo => {
+    return res.status(201).json({ status: 201, message: "success", newRecipe });
+  } ).catch(err => console.log(err, "error"))
+
+}
+
 module.exports = {
   index,
   find,
-  show
+  show,
+  favorite
 };
