@@ -29,7 +29,6 @@ const show = (req, res) => {
     }
   })
   .then(response => {
-    console.log(response.data)
     if (response) res.json({ recipe: response.data })
     else res.json({message: "no recipe found"})
   })
@@ -42,26 +41,35 @@ const show = (req, res) => {
 const favorite = async (req, res) => {
   // find user 
   const foundUser = await db.user.findOne({ where: { id: req.body.user.id } })
-  const ingredients = []
-  
-  for (let i = 0; i < req.body.extendedIngredients.length; i++) {
-    ingredients.push(req.body.extendedIngredients[i].original)
-  }
-  ingredients = ingredients.join(', ')
-
+  //in case no user is found
   if (!foundUser) {
    return res.json({ message: "No user found"})
   }
+  
+  // const ingredients = []
+  // // push ingredients into array
+  // for (let i = 0; i < req.body.extendedIngredients.length; i++) {
+  //   ingredients.push(req.body.extendedIngredients[i].original)
+  // }
+  // // make array into string
+  // ingredients = ingredients.join(', ')
+  
+  // create new recipe
   const newRecipe = await db.recipe.create({
     title: req.body.title,
     instructions: req.body.instructions,
     image_url: req.body.image,
     ingredients: req.body.extendedIngredients.join(', ')
-  }) 
-  foundUser.createRecipe(newRecipe).then(relationInfo => {
-    return res.status(201).json({ status: 201, message: "success", newRecipe });
-  } ).catch(err => console.log(err, "error"))
+  }).catch(err => res.json({status: 400, message: "error creating recipe", error: err}))
 
+  // associate recipe with user
+  const makeAssoc = await foundUser.createRecipe(newRecipe).catch(err => console.log(err, "error"))
+  // for some reason, createRecipe hasn't been adding the assoc, so this will manually do so:
+  foundUser.addRecipe(newRecipe).then(response => {
+    foundUser.getRecipes().then(recipes => {
+      return res.status(201).json({ status: 201, message: "success", recipes })
+    })
+  })
 }
 
 module.exports = {

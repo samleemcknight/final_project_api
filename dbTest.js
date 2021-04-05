@@ -30,13 +30,18 @@ const db = require('./models')
 //    console.log(err)
 //  })
 
-db.user.findOne({ 
-  where: {id: 1}
-}).then(user => {
-  user.createRecipe({
-    title: "Zesty Chicken",
-    ingredients: "chicken, cilantro, jalapenos"
-  }).then(res => {
-    console.log(res)
-  })
-})
+// db.user.findOne({ 
+//   where: {id: 1}
+// }).then(user => {
+//   user.createRecipe({
+//     title: "Roast Lamb",
+//     ingredients: "1 leg of lamb, rosemary, olive oil, onions, garlic"
+//   }).then(res => {
+//     console.log(res)
+//   })
+// })
+
+db.recipe.destroy({where: {title: "Delicious Lorem Ipsum"}})
+  .then(res => {
+  console.log(res)
+}).catch(err => console.log(err))
