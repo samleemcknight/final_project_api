@@ -41,7 +41,19 @@ const db = require('./models')
 //   })
 // })
 
-db.recipe.destroy({where: {title: "Delicious Lorem Ipsum"}})
-  .then(res => {
-  console.log(res)
-}).catch(err => console.log(err))
+// db.recipe.destroy({where: {title: "Delicious Lorem Ipsum"}})
+//   .then(res => {
+//   console.log(res)
+// }).catch(err => console.log(err))
+
+db.ingredient.findOrCreate({where :{name: "orange"}})
+.then(([ingredient, created]) => {
+  db.user.findOne({where: {id: 1}})
+  .then(user => {
+    user.addIngredient(ingredient)
+  }).then(res => {
+    console.log(res)
+  }).catch(err => {
+    console.log(err)
+  })
+})
