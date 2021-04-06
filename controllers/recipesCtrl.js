@@ -8,6 +8,20 @@ const index = (req, res) => {
   res.send(recipesJson);
 };
 
+const addIngredient = (req, res) => {
+  db.ingredient.findOrCreate({
+    where: {
+      name: req.body.name
+    }
+  })
+  .then(([response, created]) => {
+    res.json({ message: "Ingredient Added", ingredient: response})
+  })
+  .catch(err => {
+    res.json({ message: "There was an error", error: err})
+  })
+}
+
 const find = (req, res) => {
   axios.get(urlIngredients, {
       params: {
@@ -16,7 +30,7 @@ const find = (req, res) => {
         number: 5
       },
     })
-    .then((response) => {
+    .then(response => {
       res.json({ recipes: response.data });
     });
 };
@@ -76,5 +90,6 @@ module.exports = {
   index,
   find,
   show,
-  favorite
+  favorite,
+  addIngredient
 };
