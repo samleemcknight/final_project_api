@@ -2,31 +2,25 @@ const recipesJson = require("../recipes.json");
 const { default: axios } = require("axios");
 const urlIngredients = `https://api.spoonacular.com/recipes/findByIngredients`;
 const urlRecipe = `https://api.spoonacular.com/recipes/`
-const db = require('../models')
+const db = require('../models');
 
 const index = (req, res) => {
   res.send(recipesJson);
 };
 
-const addIngredient = (req, res) => {
-  db.ingredient.findOrCreate({
-    where: {
-      name: req.body.name
-    }
+const find = async (req, res) => {
+  const foundUser = await db.user.findOne({
+    where : {id: 1},
+    include: [db.ingredient]
   })
-  .then(([response, created]) => {
-    res.json({ message: "Ingredient Added", ingredient: response})
-  })
-  .catch(err => {
-    res.json({ message: "There was an error", error: err})
-  })
-}
-
-const find = (req, res) => {
+  let ingredients = []
+  for (let i=0; i<foundUser.ingredients.length; i++) {
+    ingredients.push(foundUser.ingredients[i].name)
+  }
   axios.get(urlIngredients, {
       params: {
         apiKey: process.env.API_KEY,
-        ingredients: req.params,
+        ingredients: ingredients.join(","),
         number: 5
       },
     })
@@ -91,5 +85,4 @@ module.exports = {
   find,
   show,
   favorite,
-  addIngredient
 };

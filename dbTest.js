@@ -46,14 +46,21 @@ const db = require('./models')
 //   console.log(res)
 // }).catch(err => console.log(err))
 
-db.ingredient.findOrCreate({where :{name: "orange"}})
-.then(([ingredient, created]) => {
-  db.user.findOne({where: {id: 1}})
-  .then(user => {
-    user.addIngredient(ingredient)
-  }).then(res => {
-    console.log(res)
-  }).catch(err => {
-    console.log(err)
-  })
-})
+// db.ingredient.findOrCreate({where :{name: "orange"}})
+// .then(([ingredient, created]) => {
+//   db.user.findOne({where: {id: 1}})
+//   .then(user => {
+//     user.addIngredient(ingredient)
+//   }).then(res => {
+//     console.log(res)
+//   }).catch(err => {
+//     console.log(err)
+//   })
+// })
+
+db.ingredient.update(
+  {name: "Chicken"},
+  {where: {id: 6}}
+).then(response => {
+  console.log(response)
+}).catch(err => err)
