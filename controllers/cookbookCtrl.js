@@ -13,19 +13,18 @@ const index = async (req, res) => {
   }
 };
 
-const show = (req, res) => {
-  axios.get(`${urlRecipe}/${req.params.id}/information`, {
-    params: {
-      apiKey: process.env.API_KEY,
-    }
-  })
-  .then(response => {
-    if (response) res.json({ recipe: response.data })
-    else res.json({message: "no recipe found"})
-  })
-  .catch(err => {
-    res.json({ message: "there was an error" })
-  })
+const show = async (req, res) => {
+  try {
+    const foundRecipe = await db.recipe.findOne({
+      where: {
+        id: req.params.id
+      }
+    })
+    res.json({ status: 201, message: "success", recipe: foundRecipe })
+  }
+  catch (error) {
+    return res.json({ status: 401, message: "error", error })
+  }
 }
 
 module.exports = {

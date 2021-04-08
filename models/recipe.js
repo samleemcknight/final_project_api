@@ -18,7 +18,7 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     instructions: DataTypes.TEXT,
     image_url: DataTypes.STRING,
-    ingredients: DataTypes.STRING
+    ingredients: DataTypes.TEXT
   }, {
     sequelize,
     modelName: 'recipe',

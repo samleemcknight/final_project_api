@@ -65,7 +65,7 @@ const favorite = async (req, res) => {
   if (!foundUser) {
    return res.json({ message: "No user found"})
   }
-  
+
   // create new recipe
   const [newRecipe, created] = await db.recipe.findOrCreate({
     where: { title: req.body.title},
