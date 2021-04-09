@@ -28,6 +28,7 @@ const show = async (req, res) => {
 }
 
 const deleteRecipe = async (req, res) => {
+  console.log("inside delete function/client")
   try {
     db.recipe.destroy({
       where: {

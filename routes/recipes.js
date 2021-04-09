@@ -3,7 +3,6 @@ const router = require("express").Router();
 const ctrl = require("../controllers");
 
 //routes
-router.get("/", ctrl.recipesCtrl.index);
 router.get("/ingredients", ctrl.ingredientCtrl.allIngredients)
 router.post("/add_ingredient", ctrl.ingredientCtrl.addIngredient)
 router.delete("/ingredients", ctrl.ingredientCtrl.removeIngredient)
