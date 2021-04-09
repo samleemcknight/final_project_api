@@ -1,4 +1,5 @@
 const db = require('../models');
+const {Op} = require('sequelize')
 
 // for showing recipes in cookbook
 const index = async (req, res) => {
@@ -17,7 +18,10 @@ const show = async (req, res) => {
   try {
     const foundRecipe = await db.recipe.findOne({
       where: {
-        id: req.params.id
+        [Op.or]: [
+          {id: req.params.id },
+          {title: req.params.id }
+        ]
       }
     })
     res.json({ status: 201, message: "success", recipe: foundRecipe })
