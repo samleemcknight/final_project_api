@@ -34,6 +34,12 @@ const register = async (req, res) => {
 }
 
 const login = (req, res) => {
+  try {
+
+  }
+  catch(error) {
+    
+  }
   res.sendStatus(201)
 }
 
