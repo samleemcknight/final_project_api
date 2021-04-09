@@ -15,7 +15,6 @@ const index = async (req, res) => {
 };
 
 const show = async (req, res) => {
-  console.log(req.query)
   try {
     const foundRecipe = await db.recipe.findOne({
       where: {
