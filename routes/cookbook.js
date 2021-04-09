@@ -4,8 +4,8 @@ const ctrl = require("../controllers");
 
 //routes
 router.get("/", ctrl.cookbookCtrl.index);
-router.get("/:id", ctrl.cookbookCtrl.show);
-router.delete("/delete/:id", ctrl.cookbookCtrl.deleteRecipe )
+router.get("/show/:id", ctrl.cookbookCtrl.show);
+router.delete("/delete/:id", ctrl.cookbookCtrl.deleteRecipe)
 
 // exports
 module.exports = router;

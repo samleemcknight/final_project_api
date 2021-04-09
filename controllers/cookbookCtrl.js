@@ -15,16 +15,19 @@ const index = async (req, res) => {
 };
 
 const show = async (req, res) => {
+  console.log(req.query)
   try {
     const foundRecipe = await db.recipe.findOne({
       where: {
         [Op.or]: [
-          {id: req.params.id },
-          {title: req.params.id }
+          {id: req.params.id},
+          {title: req.query.title}
         ]
       }
     })
-    res.json({ status: 201, message: "success", recipe: foundRecipe })
+    if (foundRecipe) {
+      res.json({ status: 201, message: "success", recipe: foundRecipe })
+    } else { res.json({ status: 400, message: "no recipes found"})}
   }
   catch (error) {
     return res.json({ status: 401, message: "error", error })
@@ -32,7 +35,6 @@ const show = async (req, res) => {
 }
 
 const deleteRecipe = async (req, res) => {
-  console.log("inside delete function/client")
   try {
     db.recipe.destroy({
       where: {
