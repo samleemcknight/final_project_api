@@ -4,20 +4,6 @@ const urlIngredients = `https://api.spoonacular.com/recipes/findByIngredients`;
 const urlRecipe = `https://api.spoonacular.com/recipes/`
 const db = require('../models');
 
-// for showing recipes in cookbook
-const index = async (req, res) => {
-  try {
-    const foundUser = await db.user.findOne({
-      where : {id: 1},
-      include: [db.recipe]
-    })
-    res.json({ status: 201, message: "success", recipes: foundUser.recipes })
-  } catch (error) {
-    return res.json({ status: 401, message: "error", error })
-  }
-
-};
-
 const find = async (req, res) => {
   const foundUser = await db.user.findOne({
     where : {id: 1},
@@ -87,7 +73,6 @@ const favorite = async (req, res) => {
 }
 
 module.exports = {
-  index,
   find,
   show,
   favorite,
