@@ -27,7 +27,22 @@ const show = async (req, res) => {
   }
 }
 
+const deleteRecipe = async (req, res) => {
+  try {
+    db.recipe.destroy({
+      where: {
+        id: req.params.id
+      }
+    })
+    res.json({ status: 201, message: "success" })
+  }
+  catch (error) {
+    return res.json({ status: 401, message: "error", error })
+  }
+}
+
 module.exports = {
   index,
-  show
+  show,
+  deleteRecipe
 };
