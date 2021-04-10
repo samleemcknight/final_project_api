@@ -5,7 +5,7 @@ const getUser = async (req, res, next) => {
   console.log('===== user!!======')
   console.log(req.user)
   if (req.user) {
-    res.json({ user: req.user })
+    res.json({ status: 200, message: "success", user: req.user })
   } else {
     res.json({ user: null })
   }

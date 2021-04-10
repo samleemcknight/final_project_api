@@ -3,7 +3,7 @@ const LocalStrategy = require('./localStrategy')
 const db = require('../models')
 
 passport.serializeUser((user, cb) => {
-  cb(null, {id: user.id})
+  cb(null, user.id)
 })
 
 passport.deserializeUser((id, cb) => {

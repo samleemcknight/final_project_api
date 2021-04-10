@@ -9,17 +9,14 @@ router.post('/register', ctrl.authCtrl.register)
 router.get('/user', ctrl.authCtrl.getUser)
 router.get('/logout', ctrl.authCtrl.logout)
 
-router.post('/login', (req, res, next) => {
-  console.log('routes/user.js, login, req.body: ');
-  console.log(req.body)
-  next()
-}, passport.authenticate('local'),
+router.post('/login', passport.authenticate('local'),
     (req, res) => {
-        console.log('logged in', req.user);
+        console.log('logged in', req.user.username);
+        console.log("\n\n")
         const userInfo = {
             username: req.user.username
         };
-        res.send(userInfo);
+        res.send(userInfo)
     }
 )
 
