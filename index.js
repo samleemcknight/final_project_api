@@ -1,3 +1,4 @@
+const passport = require('./passport/ppConfig')
 // initialize dotenv for environmental variables
 require("dotenv").config();
 
@@ -24,8 +25,16 @@ app.use(session({
   saveUninitialized: true
 }));
 
+// initialize the passport configuration and session as middleware
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.use("/api/v1/recipes", routes.recipes);
 app.use("/api/v1/cookbook", routes.cookbook)
 app.use("/api/v1/auth", routes.auth);
+
+app.get('/', (req, res) => {
+  res.send('success');
+});
 
 app.listen(port, process.env.IP_ADDRESS, () => console.log(`Server is running on port ${port}`));

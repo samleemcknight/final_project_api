@@ -64,7 +64,6 @@ module.exports = (sequelize, DataTypes) => {
       let hash = bcrypt.hashSync(pendingUser.password, 12)
       // store the hashed password in the db
       pendingUser.password = hash
-      console.log("user password hashed")
     }
   })
 
