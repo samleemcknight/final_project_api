@@ -14,6 +14,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       models.user.hasMany(models.recipe)
+      models.user.belongsToMany(models.ingredient, {through: "users_ingredients"})
     }
 
     validPassword(plainTextPassword) {
@@ -63,7 +64,6 @@ module.exports = (sequelize, DataTypes) => {
       let hash = bcrypt.hashSync(pendingUser.password, 12)
       // store the hashed password in the db
       pendingUser.password = hash
-      console.log("user password hashed")
     }
   })
 
