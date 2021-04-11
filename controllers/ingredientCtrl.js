@@ -5,6 +5,9 @@ const allIngredients = async (req, res) => {
     where : {id: req.user.id},
     include: [db.ingredient]
   })
+  if (typeof foundUser.ingredients[0] === "undefined") {
+    return res.json({status: 404, message: "this user has no ingredients"})
+  }
   return res.json({ ingredients: foundUser.ingredients })
 }
 
