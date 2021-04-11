@@ -17,7 +17,7 @@ const strategy = new LocalStrategy(
         console.log("invalid password")
 				return done(null, false, { message: 'Incorrect password' })
 			}
-      console.log(user)
+      
 			return done(null, user)
     }).catch(err => console.log(error))
 	}
