@@ -58,9 +58,26 @@ const db = require('./models')
 //   })
 // })
 
-db.ingredient.update(
-  {name: "Chicken"},
-  {where: {id: 6}}
-).then(response => {
-  console.log(response)
-}).catch(err => err)
+// db.ingredient.update(
+//   {name: "Chicken"},
+//   {where: {id: 6}}
+// ).then(response => {
+//   console.log(response)
+// }).catch(err => err)
+
+const removeIngredient = async (req, res) => {
+  // since users may input the same ingredients, make sure that they only delete the ingredients
+  // associated with them
+  const foundUser = await db.user.findOne({where: {id: req.user.id}, include: [db.ingredient]})
+  const ingredients = foundUser.ingredients
+  
+  const ingredient = ingredients.filter(el => el.name === req.body.name)
+
+  db.ingredient.destroy({where: {id: ingredient[0].id}})
+  .then(data => res.json({message: "Success"}))
+  .catch(error => {
+      res.json({message: "There was an error", error: err})
+    })
+}
+
+removeIngredient({user: {id: 2}, body: {name: "Lemon"}}, null)

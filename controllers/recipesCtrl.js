@@ -6,7 +6,7 @@ const db = require('../models');
 
 const find = async (req, res) => {
   const foundUser = await db.user.findOne({
-    where : {id: 1},
+    where : {id: req.user.id},
     include: [db.ingredient]
   })
   // format user's ingredients into friendly version for api request
@@ -46,7 +46,7 @@ const show = (req, res) => {
 // add recipe on '/show' to db favorites
 const favorite = async (req, res) => {
   // find user 
-  const foundUser = await db.user.findOne({ where: { id: 1 } })
+  const foundUser = await db.user.findOne({ where: { id: req.user.id } })
   //in case no user is found
   if (!foundUser) {
    return res.json({ message: "No user found"})

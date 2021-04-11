@@ -2,7 +2,7 @@ const db = require('../models');
 
 const allIngredients = async (req, res) => {
   const foundUser = await db.user.findOne({
-    where : {id: 1},
+    where : {id: req.user.id},
     include: [db.ingredient]
   })
   return res.json({ ingredients: foundUser.ingredients })
@@ -14,7 +14,7 @@ const addIngredient = async (req, res) => {
       where: { name: req.body.name }
     })
     
-    const foundUser = await db.user.findOne({ where: { id: 1 } })
+    const foundUser = await db.user.findOne({ where: { id: req.user.id } })
     //in case no user is found
     if (!foundUser) {
      return res.json({ message: "No user found"})
@@ -30,8 +30,14 @@ const addIngredient = async (req, res) => {
   }
 }
 
-const removeIngredient = (req, res) => {
-  db.ingredient.destroy({where: {name: req.body.name}})
+// needs to be changed to where it's based on ID instead
+const removeIngredient = async (req, res) => {
+  const foundUser = await db.user.findOne({where: {id: req.user.id}, include: [db.ingredient]})
+  const ingredients = foundUser.ingredients
+  
+  const ingredient = ingredients.filter(el => el.name === req.body.name)
+
+  db.ingredient.destroy({where: {id: ingredient[0].id}})
   .then(data => res.json({message: "Success"}))
   .catch(error => {
       res.json({message: "There was an error", error: err})

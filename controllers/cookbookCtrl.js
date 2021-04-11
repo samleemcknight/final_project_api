@@ -5,7 +5,7 @@ const {Op} = require('sequelize')
 const index = async (req, res) => {
   try {
     const foundUser = await db.user.findOne({
-      where : {id: 1},
+      where : {id: req.user.id},
       include: [db.recipe]
     })
     res.json({ status: 201, message: "success", recipes: foundUser.recipes })
