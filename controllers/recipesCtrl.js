@@ -2,21 +2,27 @@ const recipesJson = require("../recipes.json");
 const { default: axios } = require("axios");
 const urlIngredients = `https://api.spoonacular.com/recipes/findByIngredients`;
 const urlRecipe = `https://api.spoonacular.com/recipes/`
-const db = require('../models')
+const db = require('../models');
 
-const index = (req, res) => {
-  res.send(recipesJson);
-};
-
-const find = (req, res) => {
+const find = async (req, res) => {
+  const foundUser = await db.user.findOne({
+    where : {id: req.user.id},
+    include: [db.ingredient]
+  })
+  // format user's ingredients into friendly version for api request
+  let ingredients = []
+  for (let i=0; i<foundUser.ingredients.length; i++) {
+    ingredients.push(foundUser.ingredients[i].name)
+  }
+  // api request
   axios.get(urlIngredients, {
       params: {
         apiKey: process.env.API_KEY,
-        ingredients: req.params,
+        ingredients: ingredients.join(","),
         number: 5
       },
     })
-    .then((response) => {
+    .then(response => {
       res.json({ recipes: response.data });
     });
 };
@@ -29,7 +35,6 @@ const show = (req, res) => {
     }
   })
   .then(response => {
-    console.log(response.data)
     if (response) res.json({ recipe: response.data })
     else res.json({message: "no recipe found"})
   })
@@ -41,32 +46,34 @@ const show = (req, res) => {
 // add recipe on '/show' to db favorites
 const favorite = async (req, res) => {
   // find user 
-  const foundUser = await db.user.findOne({ where: { id: req.body.user.id } })
-  const ingredients = []
-  
-  for (let i = 0; i < req.body.extendedIngredients.length; i++) {
-    ingredients.push(req.body.extendedIngredients[i].original)
-  }
-  ingredients = ingredients.join(', ')
-
+  const foundUser = await db.user.findOne({ where: { id: req.user.id } })
+  //in case no user is found
   if (!foundUser) {
    return res.json({ message: "No user found"})
   }
-  const newRecipe = await db.recipe.create({
-    title: req.body.title,
-    instructions: req.body.instructions,
-    image_url: req.body.image,
-    ingredients: req.body.extendedIngredients.join(', ')
-  }) 
-  foundUser.createRecipe(newRecipe).then(relationInfo => {
-    return res.status(201).json({ status: 201, message: "success", newRecipe });
-  } ).catch(err => console.log(err, "error"))
 
+  // create new recipe
+  const [newRecipe, created] = await db.recipe.findOrCreate({
+    where: { title: req.body.title},
+    defaults: {
+      title: req.body.title,
+      instructions: req.body.instructions,
+      image_url: req.body.image_url,
+      ingredients: req.body.ingredients
+    }
+  })
+
+  // associate recipe with user
+  
+  foundUser.addRecipe(newRecipe).then(response => {
+    foundUser.getRecipes().then(recipes => {
+      return res.status(201).json({ status: 201, message: "success", recipes })
+    })
+  })
 }
 
 module.exports = {
-  index,
   find,
   show,
-  favorite
+  favorite,
 };
