@@ -11,8 +11,6 @@ router.get('/logout', ctrl.authCtrl.logout)
 
 router.post('/login', passport.authenticate('local'),
     (req, res) => {
-        console.log('logged in', req.user.username);
-        console.log("\n\n")
         const userInfo = {
             username: req.user.username
         };

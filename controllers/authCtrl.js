@@ -23,7 +23,6 @@ const register = async (req, res) => {
     })
     
     if (created) {
-      console.log('user created');
       passport.authenticate('local')(req, res);
       return res.status(201).json({ status: 201, message: "success", user });
       } else {
