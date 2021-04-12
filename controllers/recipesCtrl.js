@@ -23,7 +23,7 @@ const find = async (req, res) => {
       params: {
         apiKey: process.env.API_KEY,
         ingredients: ingredients.join(","),
-        number: 5
+        number: 8
       },
     })
     .then(response => {
