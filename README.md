@@ -2,7 +2,7 @@
 
 ## Find Me a Recipe
 
-Find Me a Recipe is a fullstack mobile app for finding new recipe suggestions based on a user-inputted list of ingredients. This is an app for getting recipe ideas when you don't want to (or cannot) take a trip to the grocery store and you need inspiration for what you can cook with what you have at home. The inspiration behind this is to encourage creative and explorative cooking while also decreasing food waste.
+Find Me A Recipe is committed to eliminating food waste and encouraging explorative cooking choices. The app accomplishes this by suggesting recipes to users based on on-hand ingredients in the pantry or refrigerator. This is an app for getting recipe ideas when you don't want to (or cannot) take a trip to the grocery store and you need inspiration for what you can cook with what you have.
  
 Find Me a Recipe is built with Node, Express, React Native, and PostgreSQL. 
 
@@ -27,7 +27,7 @@ cd final_project_client
 npm i
 ```
 
-You will have to create your own ``.env`` file and create your own SECRET_SESSION variable in the API and supply your local machine's IP address to an .env file in the client side. After this, run nodeman (``nodemon``) and expo (``npm start``) on two terminal windows.
+You will have to create your own ``.env`` file and create your own SECRET_SESSION variable in the API and supply your local machine's IP address to an in place of the url on the client side (of course, you can just use the Heroku server to make things easier). After this, run nodeman (``nodemon``) and expo (``npm start``) on two terminal windows.
 
 ### ERD:
 

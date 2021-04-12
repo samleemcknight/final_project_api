@@ -1,7 +1,7 @@
 const db = require('../models')
 const passport = require('../passport/ppConfig')
 
-const getUser = async (req, res) => {
+const getUser = async (req, res, next) => {
   if (req.user) {
     res.json({ status: 200, message: "success", user: req.user })
   } else {
@@ -10,7 +10,7 @@ const getUser = async (req, res) => {
 }
 
 const register = async (req, res) => {
-  console.log(req.session)
+  
   try {
     // create an instance of user model with req.body object
     const [user, created] = await db.user.findOrCreate({
@@ -23,7 +23,9 @@ const register = async (req, res) => {
     })
     
     if (created) {
-      passport.authenticate('local')(req, res);
+      passport.authenticate('local',{
+        successRedirect: '/',
+      })(req, res);
       return res.status(201).json({ status: 201, message: "success", user });
       } else {
         return res.json({status: 500, message: 'email already exists'})
