@@ -9,8 +9,8 @@ const getUser = async (req, res, next) => {
   }
 }
 
-const register = async (req, res) => {
-  console.log(req.session)
+const register = async (req, res, next) => {
+  
   try {
     // create an instance of user model with req.body object
     const [user, created] = await db.user.findOrCreate({
@@ -22,6 +22,7 @@ const register = async (req, res) => {
           }
     })
     
+    // take out for now until I figure out where the callback is going wrong
     if (created) {
       passport.authenticate('local')(req, res);
       return res.status(201).json({ status: 201, message: "success", user });
