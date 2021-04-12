@@ -43,11 +43,12 @@ As a user...
 - I want to be able to save recipes to, and remove them from, my favorites
 - I want an easy-to-use, minimalist UI
 
-## Wireframes:
+## Screenshots:
 
 Log-In/Sign Up Screen:
 
 <img src="./public/login.png" width="200"/>
+<img src="./public/signup.png" width="200"/>
 
 Welcome Screen:
 
@@ -59,7 +60,7 @@ Suggestions Home Screen:
 
 Navbar:
 
-<img src="./public/hamburger_navbar.png" width="200" />
+<img src="./public/hamburger_navbar.png" height="150" />
 
 Cookbook Index:
 
@@ -68,7 +69,3 @@ Cookbook Index:
 Cookbook Show Page:
 
 <img src="./public/cookbook_show.png" width="200" />
-
-Profile:
-
-<img src="./public/profile.png" width="200" />

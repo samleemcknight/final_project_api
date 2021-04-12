@@ -1,6 +1,7 @@
 const db = require('../models/')
 const LocalStrategy = require('passport-local').Strategy
 
+
 const strategy = new LocalStrategy(
 	{
 		usernameField: 'username' 
@@ -9,12 +10,11 @@ const strategy = new LocalStrategy(
 		db.user.findOne({ 
       where : { username: username }
     }).then((user) => {
-      
 			if (!user || !user.validPassword(password)) {
         console.log("invalid password or username")
 				return done(null, false, { message: 'Incorrect password' })
 			} else {
-				console.log(user)
+				console.log("new user registered")
 				return done(null, user)
 
 			}
