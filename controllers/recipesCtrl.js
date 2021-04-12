@@ -9,6 +9,10 @@ const find = async (req, res) => {
     where : {id: req.user.id},
     include: [db.ingredient]
   })
+  // if user does not have ingredients, return this message
+  if (typeof foundUser.ingredients[0] === "undefined") {
+    return res.json({status: 404, message: "you must add ingredients before you can get suggestions"})
+  }
   // format user's ingredients into friendly version for api request
   let ingredients = []
   for (let i=0; i<foundUser.ingredients.length; i++) {

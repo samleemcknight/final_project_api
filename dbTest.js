@@ -65,19 +65,23 @@ const db = require('./models')
 //   console.log(response)
 // }).catch(err => err)
 
-const removeIngredient = async (req, res) => {
-  // since users may input the same ingredients, make sure that they only delete the ingredients
-  // associated with them
-  const foundUser = await db.user.findOne({where: {id: req.user.id}, include: [db.ingredient]})
-  const ingredients = foundUser.ingredients
+// const removeIngredient = async (req, res) => {
+//   // since users may input the same ingredients, make sure that they only delete the ingredients
+//   // associated with them
+//   const foundUser = await db.user.findOne({where: {id: req.user.id}, include: [db.ingredient]})
+//   const ingredients = foundUser.ingredients
   
-  const ingredient = ingredients.filter(el => el.name === req.body.name)
+//   const ingredient = ingredients.filter(el => el.name === req.body.name)
 
-  db.ingredient.destroy({where: {id: ingredient[0].id}})
-  .then(data => res.json({message: "Success"}))
-  .catch(error => {
-      res.json({message: "There was an error", error: err})
-    })
-}
+//   db.ingredient.destroy({where: {id: ingredient[0].id}})
+//   .then(data => res.json({message: "Success"}))
+//   .catch(error => {
+//       res.json({message: "There was an error", error: err})
+//     })
+// }
 
-removeIngredient({user: {id: 2}, body: {name: "Lemon"}}, null)
+// removeIngredient({user: {id: 2}, body: {name: "Lemon"}}, null)
+
+db.user.findOne({where: {id: 100}}).then((res, err) => {
+  console.log(res, err)
+})

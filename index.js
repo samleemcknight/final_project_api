@@ -37,4 +37,4 @@ app.get('/', (req, res) => {
   res.send('success');
 });
 
-app.listen(port, process.env.IP_ADDRESS, () => console.log(`Server is running on port ${port}`));
+app.listen(port, () => console.log(`Server is running on port ${port}`));
