@@ -47,25 +47,25 @@ As a user...
 
 Log-In/Sign Up Screen:
 
-<img src="./public/login.png" width="200"/>
-<img src="./public/signup.png" width="200"/>
+<img src="./public/screenshots/login.png" width="200"/>
+<img src="./public/screenshots/signup.png" width="200"/>
 
 Welcome Screen:
 
-<img src="./public/welcome_pantry.png" width="200" />
+<img src="./public/screenshots/welcome_pantry.png" width="200" />
 
 Suggestions Home Screen:
 
-<img src="./public/suggested_recipes.png" width="200" />
+<img src="./public/screenshots/suggested_recipes.png" width="200" />
 
 Navbar:
 
-<img src="./public/hamburger_navbar.png" height="150" />
+<img src="./public/screenshots/hamburger_icon_navbar.png" height="150" />
 
 Cookbook Index:
 
-<img src="./public/cookbook_index.png" width="200" />
+<img src="./public/screenshots/cookbook_index.png" width="200" />
 
 Cookbook Show Page:
 
-<img src="./public/cookbook_show.png" width="200" />
+<img src="./public/screenshots/cookbook_show.png" width="200" />
