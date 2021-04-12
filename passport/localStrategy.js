@@ -1,25 +1,24 @@
 const db = require('../models/')
 const LocalStrategy = require('passport-local').Strategy
 
+
 const strategy = new LocalStrategy(
 	{
-		usernameField: 'username' // not necessary, DEFAULT
+		usernameField: 'username' 
 	},
 	function(username, password, done) {
 		db.user.findOne({ 
       where : { username: username }
     }).then((user) => {
-      
-			if (!user) {
-				return done(null, false, { message: 'Incorrect username' })
-			}
-			if (!user.validPassword(password)) {
-        console.log("invalid password")
+			if (!user || !user.validPassword(password)) {
+        console.log("invalid password or username")
 				return done(null, false, { message: 'Incorrect password' })
+			} else {
+				console.log("new user registered")
+				return done(null, user)
+
 			}
-      console.log(user)
-			return done(null, user)
-    }).catch(err => console.log(error))
+    }).catch(err => console.log(err))
 	}
 )
 
