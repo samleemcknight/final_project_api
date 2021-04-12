@@ -1,7 +1,7 @@
 const db = require('../models')
 const passport = require('../passport/ppConfig')
 
-const getUser = async (req, res, next) => {
+const getUser = async (req, res) => {
   if (req.user) {
     res.json({ status: 200, message: "success", user: req.user })
   } else {

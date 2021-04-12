@@ -1,12 +1,33 @@
 # Final Project: Fullstack Recipe App
 
-## Scope
+## Find Me a Recipe
 
-For my fimal project, I would like to rework the recipe app from my first project into a fullstack application that uses React Native for the front end, and Node.js and Express for the back end.
+Find Me a Recipe is a fullstack mobile app for finding new recipe suggestions based on a user-inputted list of ingredients. This is an app for getting recipe ideas when you don't want to (or cannot) take a trip to the grocery store and you need inspiration for what you can cook with what you have at home. The inspiration behind this is to encourage creative and explorative cooking while also decreasing food waste.
+ 
+Find Me a Recipe is built with Node, Express, React Native, and PostgreSQL. 
 
-The app will use API calls to retrieve recipe information based on the user's ingredients. The user will have the option to add recipes to their 'cookbook', which they can then reference later.
+### Local Installation Instructions:
+- this assumes you have postgres, node, and expo installed
 
-For this functionality, I want to use a PostgreSQL database that will store user profile information as well as favorite recipe's. This should fit on four tables: the user, the user's profile, pantry, and the user's recipes (cookbook).
+Git clone the backend and install the dependencies:
+```bash
+git clone https://github.com/samleemcknight/final_project_api.git
+cd final_project_api
+npm i
+```
+Create a local databse
+```bash
+createdb recipe_api
+sequelize db:migrate
+```
+Git clone the client-side and install expo:
+```bash
+git clone https://github.com/samleemcknight/final_project_client.git
+cd final_project_client
+npm i
+```
+
+You will have to create your own ``.env`` file and create your own SECRET_SESSION variable in the API and supply your local machine's IP address to an .env file in the client side. After this, run nodeman (``nodemon``) and expo (``npm start``) on two terminal windows.
 
 ### ERD:
 

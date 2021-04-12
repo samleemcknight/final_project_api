@@ -19,7 +19,7 @@ const strategy = new LocalStrategy(
 			}
       console.log(user)
 			return done(null, user)
-    }).catch(err => console.log(error))
+    }).catch(err => console.log(err))
 	}
 )
 
