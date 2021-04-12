@@ -4,10 +4,10 @@
 
 Find Me A Recipe is committed to eliminating food waste and encouraging explorative cooking choices. The app accomplishes this by suggesting recipes to users based on on-hand ingredients in the pantry or refrigerator. This is an app for getting recipe ideas when you don't want to (or cannot) take a trip to the grocery store and you need inspiration for what you can cook with what you have.
  
-Find Me a Recipe is built with Node, Express, React Native, and PostgreSQL. 
+Find Me a Recipe is built with Node, Express, React Native, and PostgreSQL. The database uses three models: user, ingredient, and recipe. The user and ingredient model has a many-to-many relationship while the user and recipe has a one-to-many to ensure that users can add, edit, and delete the same recipes.
 
 ### Local Installation Instructions:
-- this assumes you have postgres, node, and expo installed
+- this assumes you have postgres, node, and expo installed. 
 
 Git clone the backend and install the dependencies:
 ```bash
