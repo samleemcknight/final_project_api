@@ -1,5 +1,8 @@
 # Final Project: Fullstack Recipe App
 
+### Deployed URL:
+https://limitless-atoll-35923.herokuapp.com/
+
 ## Find Me a Recipe
 
 Find Me A Recipe is committed to eliminating food waste and encouraging explorative cooking choices. The app accomplishes this by suggesting recipes to users based on on-hand ingredients in the pantry or refrigerator. This is an app for getting recipe ideas when you don't want to (or cannot) take a trip to the grocery store and you need inspiration for what you can cook with what you have.
